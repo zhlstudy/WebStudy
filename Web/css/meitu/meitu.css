@@ -1,0 +1,203 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.top-bar-wrapper{
+	background-color: black;
+}
+
+
+
+/* 导航栏外部容器 */
+.top-bar{
+	max-width: 1100px;
+	margin: 0 auto;
+	height: 48px;
+	padding: 0 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: black;
+	
+}
+
+
+
+a{
+	/* 去除下划线 */
+	text-decoration: none;
+}
+a:hover{
+	color: rgb(57,57,57)
+}
+li a{
+	list-style: none;
+	color: white;
+}
+
+
+
+
+
+
+
+
+/* 设置左侧的导航图标 */
+.left-menu .menu-icon{
+	/* background-color:white;  */
+	width: 18px;
+	height: 48px;
+	position: relative;
+	
+}
+/* 导航线 */
+.menu-icon li{
+	width: 18px;
+	height: 1px;
+	background-color: blue;
+	position: absolute;
+	
+	/* 修改变形的原点 */
+	transform-origin: left center;
+	
+	transition: 0.5s;
+}
+
+/* 正常效果 */
+.menu-icon li:nth-child(1){
+	top: 18px;
+}
+.menu-icon li:nth-child(2){
+	top: 24px;
+}
+.menu-icon li:nth-child(3){
+	top: 30px;
+}
+/* 鼠标移入以后的效果  用js来实现*/
+.menu-icon:hover li:nth-child(1){
+	top: 18px;
+	
+	/* 向下旋转 */
+	transform: rotateZ(40deg);
+}
+.menu-icon:hover li:nth-child(2){
+	top: 24px;
+	
+	/* 隐藏*/
+	opacity: 0;
+}
+.menu-icon:hover li:nth-child(3){
+	top: 30px;
+	/* 向下旋转 */
+	transform: rotateZ(-40deg);
+}
+.left-menu:active .nav{
+	display: block;
+}
+
+
+
+
+
+
+
+
+/* 设置菜单 */
+.nav{
+	
+	display: none;
+	
+	position: absolute;
+	background-color: black;
+	top: 48px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	
+	padding-top: 30px;
+}
+.nav li{
+	width: 80%;
+	margin: 0 auto;
+	
+		border-bottom: 1px solid rgb(57,57,57);
+}
+.nav li a{
+	display: block;
+	
+	line-height: 44px;
+	font-size: 14px;
+	
+	/* 去除下划线 */
+	text-decoration: none;
+}
+.nav li:last-child a{
+	display: inline-block;
+	margin-right: 6px;
+}
+span{
+	color: white;
+	font-size: 14px;
+}
+
+
+
+
+.logo a{
+	text-indent: -9999px;
+	
+	display: block;
+	width: 122px;
+	height: 32px;
+	background-image: url('../../img/08.meitu/logo.png');
+	background-size: 122px 32px;
+}
+
+
+
+
+/* 这段代码是响应式设计中的媒体查询，针对不同屏幕尺寸设置样式。当屏幕宽度大于等于768px时，
+通过order属性改变元素在flex布局中的顺序，让左侧菜单在中间主体内容之后显示；通过display属性控制菜单的显示与隐藏，
+让菜单以水平方向显示，并且通过padding属性设置内边距，让菜单子项之间有一定的间隔；通过调整li和a元素的样式，
+让菜单子项水平排列并居中显示。同时，隐藏了.nav li中嵌套的span元素，
+视觉上使得菜单看起来更加简洁。最后，通过设置order属性，让logo和用户信息模块在左侧菜单之前或之后显示。 */
+
+@media only screen{
+	/* 断点 */
+	@media(min-width:768px){
+		.left-menu{
+			order: 2;
+			flex: auto;
+		}
+		/* 隐藏图标 */
+		.menu-icon{
+			display: none;
+		}
+		/* 显示菜单 */
+		.left-menu .nav{
+			display: flex;
+			position: static;
+			padding: 0;
+			justify-content: space-around;
+		}
+		.nav li{
+			margin: 0;
+			list-style: none;
+			width: auto;
+			border-bottom: none;
+		}
+		.nav li a{
+			line-height: 48px;
+		}
+		span{
+			display: none;
+		}
+			
+		.logo{
+			order: 1;
+		}
+		.user-info{
+			order: 3;
+		}
+	}
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body{
+				background-color: #aaa;
+				color: #fff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				/* vh   视口的高度单位 */
+				height: 100vh;
+			}
+			h1{
+				font-size: 120px;
+				font-weight: 700;				
+			}
+			h1::before{
+				/* 内容和h1中的内容一样 */
+				content: 'JKHSF';
+				position: absolute;
+				color: #000;
+				transform:translate(-50px,21px) scaleY(0.5) skew(50deg);
+				z-index: -1;
+				/*  滤镜效果    使其看起来模糊*/
+				filter: blur(2px);
+				-webkit-mask-image: linear-gradient(transparent,#000);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>JKHSF</h1>
+	</body>
+</html>

@@ -1,0 +1,254 @@
+<!--文档声明，当前网页版本-->
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta charset="utf-8" />
+		<title></title>
+		
+		<!-- Ctrl+/快捷键 -->
+		<!-- z-index: 999; 优先级调整  “Z-index 仅能在定位元素上奏效 -->
+		 <!-- 60deg  60渡 -->
+	<!-- 	 /* a:link{}超链接yans                                    
+		   ::before开始时::after最后    ::after解决高度塌陷 display：block；clear：both；
+		   border-width边框                                       ：table；外边距重叠可解决 
+			 
+			 .clearfix::before,
+			 .clearfix::after{
+			 	content: '';
+			 	display: table;
+			 	clear: both;
+			 }
+			 	
+		边框：
+		   border-style{solid实线dotted点虚线dashed虚线double双线}   border -top-right -radius:圆角
+		   溢出处理
+		溢出处理：
+		   overflow:visible默认值,
+		            hadden裁剪，
+					scorll生成滚动，
+					auto根据需要滚动；  对内容处理
+		   
+		   display 用来元素显示类型  block块元素 inlin行内元素  inline-block 行内块元素不会独占一行  none 隐藏
+		   box-shadow  阴影    
+		   position: fixed;固定定位 sticky 粘性定位 他的父父级元素有overflow：hidden；达到 如 
+		   font-family: "楷体";  字体属性
+		背景：
+				background-color: ;颜色
+				background-image: ;图片         background-image:linear-grdient线性渐变    	background-image:radial-gradient(大小 at 位置，颜色 位置，颜色 位置，颜色 位置，); 径向渐变
+				background-position: ;位置
+				background-repeat: ;重复方式   no-repeat不重复
+				background-size: ;大小    cover比例不变 铺满  contain比例不变 完整显示
+				background-origin: ;偏移量
+				background-clip: ;裁剪
+				background-attachment: ;是否移动  fixed固定  srcoll默认值
+		   
+	    建表：
+		    table创建一个表格
+			       <tr></tr>表示一行   有几个  就有几行
+				    <td></td>表示一个单元格  有几个  就有几个单元格  colspan=""横向合并  rowspan=""纵向合并
+-------------------------------------------------------------------------------------------------------------------		
+		过度：
+		   hover 的时候用  过度（transistion）可以指定一个属性发生变化使得切换方式
+		              transistion:height 2S;// all全部属性
+					  
+					  transition-property: ;   指定要执行过渡的属性   width  height   margin-life
+					  transition-duration: ;   指定过度效果持续时间  s 和 ms
+					  transition-timing-function: ;  指过度的时序函数  指过度执行的方式
+					        可选值：
+							    ease  默认值，慢速开始，先加速，在减速
+								linear  匀速运动
+								ease-in 加速
+								ease-out 减速
+								ease-in-out 先加速 后减速 
+								cubic-bezier( ) 来指定时序函数
+								     https://cubic-bezier.com/   后面有数值
+								steps（） 分步执行过渡效果 
+								    可以设置一个第二个值
+									    end，在时间结束时执行过渡(默认值)
+										start，在时间开始时执行	
+					  transition-delay: ; 过渡效果延迟，等一段时间执行
+					  
+					  transition 可以同时设置过渡相关的所有属性，只有一个要求，如果要写延迟，则两个时间中的第一个是持
+------------------------------------------------------------------------------------------------------------------------
+					  
+		动画：
+		   动画和过渡类似，都是可以实现一些动态的效果，不同的是过渡需要在某个属性发生变化时才会触发
+		     动画可以自动触发动态效果 
+		   animation-name: ;  要对当前元素生效的关键帧的名字
+		   animation-iteration-count: ; 动画执行的次数
+		        可选值：
+				  次数
+				  infinite 无限执行
+		   animation-direction: normal ; 指定动画运行的方向
+		       可选值：
+			     normal  默认值     从 from 向 to运行  每次都是这样 
+				 reverse  相反的方向    从 to 向 from运行  每次都是这样 
+				 alternate 来回执行  从 from 向 to运行  每次都是这样 重复执行动画时 反向执行
+		   animation-duration: ;  动画执行的时间
+		   animation-play-state: running; 设置动画执行的状态
+		       可选值：
+			      running 默认值  动画执行
+				  paused  动画暂停
+和过渡属性差不多！
+           animation：name 2s 2 1s alternate； forwords完成期保持最后一帧样式
+		   设置动画效果，必须先要设置一个关键帧，关键帧设置了动画执行每一步的步骤
+		   @keyframes name{           可以用%数to
+			   from表示动画开始的位置
+		   	from{}
+			   to表示动画结束的位置
+			to{}
+		   	
+		   }
+		   
+		变形:
+		    默认是2D效果  transform-style:preserve-3d; 设置3D效果
+		  transform：用来设置元素变形效果
+		        平移：
+				   translateX() 
+				   translateY()
+			设置当前网页的视距    人眼到网页的距离
+		  perspective:     做3D效果
+				   translateZ()
+				   
+			transform是CSS3中的一个属性，用于对元素进行2D或3D的变换效果。其可用函数分为两类：
+一些简单的变换函数，如：translate()（平移）、scale()（缩放）、rotate()（旋转）、skew()（扭曲）等；
+				一些复合变换函数，如：matrix()（矩阵变换）、translate3d()（3D平移）、scale3d()（3D缩放）、rotate3d()（3D旋转）等。
+				在使用transform属性时，需要注意以下几点：
+				
+				变换的参考点默认为元素的中心点，但可以通过transform-origin属性来改变参考点。
+				多个变换函数可以串联使用，它们的顺序会影响最终的效果，可以使用括号来改变变换的优先级。
+				transform属性对性能的影响较大，应谨慎使用。在应用transform变换后，元素的position值会变为relative，所以在使用transform变换之前，最好将元素的position值设置为fixed或absolute。
+				在使用transform变换时，可以结合使用transition属性实现平滑过渡效果。
+---------------------------------------------------------- ---------------------------------
+为元素设置透明效果：
+		    opacity: 数值;
+		   
+	    缩放：
+		   对元素进行缩放的函数：
+		         scaleX() 水平方向缩放
+				 scaleY() 垂直方向缩放
+		         scale()  双方向的缩放
+		     
+		less ：
+		   是一个css的预处理语言，css的增强版，通过可以编写更少的代码实现更强大的样式
+		      版本   有写不支持  easy-less
+			     .名字：extend(名字) 扩展指定选择器的样式
+				 
+----------------------------------------------------------------------------------------------			 
+		弹性盒：
+		    flex（弹性盒、伸缩盒）
+			  --flex-direction: ;指定容器中弹性元素排列方式
+			     可选值：
+				   row  默认值。弹性元素在容器中水平排列（左向右）
+				   row-reverse 弹性元素在容器中反向水平排列（右向左）
+				   column 弹性元素纵向排列 （自上向下）
+				   column-reverse 弹性元素纵向排列 （自下向上）
+				
+			 
+			  --弹性容器
+			        --要使用弹性盒，必须将一个元素设置为弹性容器 
+					--我们通过  display  来设置弹性容器
+					    display:flex;  设置块级弹性容器
+						diaplay:inline-flex; 设置为行内弹性容器
+				
+				
+				CSS的flex-wrap属性指定了当弹性项超出容器宽度时是否应该换行。
+				当设置为“wrap”时，如果当前行没有足够的空间容纳它们，弹性项将换到下一行。这可以实现更灵活的布局，可以适应不同的屏幕尺寸和设备方向。
+				display:flex;  设置块级弹性容器
+				flex-wrap:wrap;   超出容器宽度时是否应该换行。
+			  
+			  --弹性元素
+			        --弹性容器直接的子元素是弹性元素（弹性项）
+					--一个元素可以同时是弹性容器和弹性元素
+					
+			
+			  --弹性元素的属性：
+			  				--flex-grow: ; 指定弹性元素的伸展系数
+			  				        --当父元素有多余空间时，子元素如何伸展
+			  						--父元素的剩余空间，会按比例分配 数值比例
+			  				--flex-shrink 指定弹性元素的收缩系数
+			  				        --当父元素中的空间不足以容纳所有的子元素时，就会对子元素进行收缩
+			  主轴：
+				  justify-content：center：元素在主轴如何对齐
+							   
+			  辅轴：
+				  align-items：
+				      --元素在辅轴上如何对齐
+					  
+					  
+---------------------------------------------------------------------------------------------------------
+		像素：                          移动端
+			    css像素    物理像素
+				 --css像素  编写网页时我们 所用的像素都是css像素
+			     --默认情况下  pc端，一个css像素就是一个物理像素
+				 
+			---视口（viewport）：
+			     --视口就是屏幕中用来显示网页的区域
+				 
+			   --------可以用meta标签来设置视口大小--------------
+			      最佳像素比的视口大小我们称其为完美视口
+				<meta name="viewport" content="width=device-width"/>
+				                                                    两个意思是一样的   但是通常都是全写上的
+				<meta name="viewport" content="width=device-width,  initial-scale=1.0"/>
+					   
+			   移动端  vw表示的是视口宽度（viewport width）
+			              --100vw = 一个视口宽度
+						  
+					   rem  
+						    1 rem = 1 html的字体大小
+							          html中字体大小最小为12px   不能比它低   默认的就是12px   要用rem就需要换算
+									  
+--------------------------------------------------------------------------------------------------------------
+		响应式布局：
+		        ----网页可以根据不同的设备或窗口大小呈现出不同的效果
+				----使用响应式布局，可以是一个网页适用于所有设备
+				-----------主要是媒体查询---------
+				    使用媒体查询：
+					     语法  @media 查询规则{}
+						  --   @media all{
+						  -- 	
+						  --   }
+						     媒体类型：
+							    all  所有设备
+								print  打印设备
+								screen   带屏幕的设备
+								speech     屏幕阅读器
+								-- 可以用逗号 表示或的关系
+						  
+						  
+-------------------------------------------------------------------------------------------
+
+		  */ -->
+		  <meta name="viewport" content="width=device-width,  initial-scale=1.0"/>
+		<style >
+			
+			.a1{
+				width: 200px;
+				overflow: hidden
+				
+				height: 200px;
+				/* solid实线dotted点虚线dashed虚线double双线 */
+				border:solid #000000 3px ;
+				border-radius: ;
+				transition-timing-function:cubic-bezier();
+				animation-name: ;
+				animation-duration: ;
+				animation-iteration-count: ;
+				animation-direction: ;
+				animation-play-state: running;
+			}
+			@keyframes name{
+				from{}
+				to{}
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div class="a1">
+			
+		</div>
+		
+	</body>
+</html>

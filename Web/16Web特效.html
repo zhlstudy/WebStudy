@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jquery.js"></script>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			#mycanvas {
+				background-color: #000;
+			}
+
+
+			.box {
+				position: relative;
+				top: -90vh;
+				left: 30%;
+				display: flex;
+				justify-content: center;
+				align-items: center;				
+				width: 600px;
+				height: 90px;
+				/* background-color: aqua; */
+				overflow: hidden;
+			}
+			.box::before, .box::after{
+				content: '';
+				width: 700px;
+				position: absolute;
+				height: 700px;
+				background-image: conic-gradient(transparent, transparent, transparent, #5f27cd);
+				animation: biankuang 3s linear infinite;
+			}
+			
+			.box::after {
+				animation-delay: -1.5s;
+				background-image: conic-gradient(transparent, transparent, transparent, blue);
+			}
+			@keyframes biankuang {
+				from {
+					transform: rotate(0deg);
+				}
+			
+				to {
+					transform: rotate(360deg);
+				}
+			}
+
+
+			.a1 {
+				background-color: black;
+				position: absolute;
+				z-index: 2;				
+				inset: 5px;
+				color: #ffF;
+				
+				padding-left: 20%;
+
+				filter: contrast(40);
+				/* 调整图像的对比度   使图像中颜色块之间的反差变得更加明显*/
+			}
+
+			span {
+				font-size: 35px;
+				/* 字体描边 */
+				-webkit-text-stroke: 1px red	;
+				animation: bian 7s forwards;
+			}
+
+			@keyframes bian {
+				from {
+					/* 文本中各个字符之间的间距 */
+					letter-spacing: -50px;
+					filter: blur(10px);
+					/* 给图像设置高斯模糊 */
+				}
+
+				to {
+					letter-spacing: 0px;
+					filter: blur(1px);
+				}
+			}
+
+
+
+			.pic {
+				position: absolute;
+				top: 50%;
+				left: 45%;
+				display: flex;
+				width: 240px;
+				height: 160px;
+
+				/* 开启一个3D效果 */
+				transform-style: preserve-3d;
+				animation: action 20s linear infinite;
+
+			}
+
+			.pic:hover {
+				/* 出现小手 */
+				cursor: pointer;
+				animation-play-state: paused;
+			}
+
+			@keyframes action {
+				from {
+					transform: rotateX(-5deg) rotateY(0deg);
+				}
+
+				to {
+					transform: rotateX(-5deg) rotateY(360deg);
+				}
+			}
+
+			.pic img {
+				position: absolute;
+				/* 倒影的效果              below表示倒影在元素下方，15px表示倒影高度为原元素高度的15%。 */
+				/*                              定义了一个从透明到半透明白色的渐变，作为倒影的覆盖层。整个属性的作用是创建一个元素的倒影，并在倒影上添加一个半透明白色的层 */
+				-webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 10%, rgba(255, 255, 255, 0.5));
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mycanvas"></canvas>
+		<script>
+			// 画布对象
+			const canvas = document.getElementById('mycanvas');
+			//笔  2D 渲染上下文对象可用于画布的绘制、样式的设置、文本的绘制、图像处理等操作。
+			const ctx = canvas.getContext('2d');
+			// 画布的高宽是   window窗体的宽高
+			canvas.width = window.innerWidth;;
+			canvas.height = window.innerHeight;
+
+			// 把方法和坐标都放在一个类里面
+			class Ball {
+				// 类中的constructor()方法是一个特殊的方法，它会在创建对象实例时被自动调用，用来初始化对象的属性值。
+				constructor(x, y, dirx, diry, color) {
+					this.x = x;
+					this.y = y;
+					// 方向
+					this.dirx = dirx;
+					this.diry = diry;
+					this.color = color;
+					// 透明度量
+					this.opcity = 4;
+				}
+				draw() {
+					// 即开始一次新的绘制。
+					ctx.beginPath();
+					ctx.fillStyle = this.color;
+					ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+					ctx.fill();
+					ctx.closePath()
+				}
+				update() { //现在update这会就相当于一个定时器
+					this.dirx *= 0.99;
+					this.diry *= 0.99;
+
+					this.diry += 0.1;
+					this.x += this.dirx;
+					this.y += this.diry;
+					// 透明量变小 
+					this.opcity -= 0.02;
+					this.draw()
+				}
+			}
+
+			//点击一次只创建一个，需要的是一次创建很多个   创建一个数组来装他们
+			var balls = [];
+			// 添加一个函数一直执行修改函数
+			function animate() {
+				// 设置上一次的颜色
+				ctx.fillStyle = 'rgba(0,0,0,0.05)';
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				// 上面两步相当于给画布重新填充一遍
+				for (let i = 0; i < balls.length; i++) {
+					balls[i].update();
+					// 透明色变小后删除
+					if (balls[i].opcity < 0.1) {
+						balls.splice(i, 1)
+					}
+				}
+				// 重复执行动画
+				requestAnimationFrame(animate)
+			}
+			animate();
+
+			// 给画布添加一个点击事件
+			canvas.addEventListener("click", (e) => {
+				// 点击的时候就创建多个
+				let num = 400;
+				// 创建偏移弧度
+				let hd = Math.PI * 2 / num;
+				//循环创建
+				for (let i = 0; i < num; i++) {
+					balls.push(new Ball(
+						e.x,
+						e.y,
+						// 爆炸方向
+						Math.cos(hd * i) * (Math.random() * 10),
+						Math.sin(hd * i) * (Math.random() * 10),
+						// 添加一个随机颜色
+						`hsl(${Math.random()*360},50%,50%)`
+					))
+				}
+			})
+		</script>
+		<div class="box">
+			<div class="a1">
+				<span>
+			图片旋转 <br />
+			 <p style="margin-left: 30%;font-size: 20px;color: #5f27cd;"> ---软件21-1 张洪浪</p>
+		</span>
+			</div>
+		</div>
+
+
+		<div class="pic">
+			<img src="img/07.yidong/banner.jpg" alt="">
+			<img src="img/12.xuanzhuan/image01.jpeg" alt="">
+			<img src="img/12.xuanzhuan/image02.jpeg" alt="">
+			<img src="img/12.xuanzhuan/image03.jpeg" alt="">
+			<img src="img/12.xuanzhuan/image04.jpeg" alt="">
+			<img src="img/12.xuanzhuan/image05.jpeg" alt="">
+					
+		</div>
+		<script>
+			var a = $('.pic img')
+			if (a.length>0 && a.length < 10) {
+				a.css({
+					'width': '240px',
+					'height': '150px',
+				})
+			}else if(a.length>=10 && a.length<=20){
+				a.css({
+					'width': '100px',
+					'height': '70px',
+				})
+			}else{
+				a.css({
+					'width': '10px',
+					'height': '10px',
+				})
+				alert("图片太多！请减少图片在试！！！！！")
+			}
+			
+			for (let i = 1; i < a.length + 1; i++) {
+				var b = 360 / a.length
+				if (i == 1) {
+					$(".pic img:nth-child(" + i + ")").css(
+						'transform', 'translateZ(350px)'
+					)
+				} else {
+					$(".pic img:nth-child(" + i + ")").css(
+						'transform', ' rotateY(' + b * (i - 1) + 'deg) translateZ(350px)'
+					)
+				}
+			}
+		</script>
+
+	</body>
+</html>

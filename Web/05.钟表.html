@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			/* .sec-wrapper{
+				width: 500px;
+				height: 500px; */
+				/* background-color: #00FFFF;
+			/* 	margin: auto;
+				animation: run 60s;
+			}
+			.sec{
+				height: 250px;
+				width: 4px;
+				margin: auto;
+				background-color: red; */ 
+				/* transform: rotateZ(45deg); */
+				/* animation: run 60s; */
+			/* } */
+			
+			/*  动画转动效果*/
+			/* @keyframes run{
+				from{
+					transform: rotateZ(0);
+				}
+				to{
+					transform: rotateZ(360deg);
+				}
+			} */
+			/* --------------------------------------------------------------------------------------------------------- */
+			
+			/* 设置表盘样式 */
+			.clock{
+				width: 500px;
+				height: 500px;
+				border-radius: 50%;
+				margin: auto;
+				margin-top: 100px;
+				/* border: 10px solid #000000; */
+				
+				position: relative;
+				background-image: url('img/05.time/shijian.jpg');
+				background-size: cover;
+			}
+			.clock>div{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+			
+			/* 设置时针 */
+			.hour-wrapper{
+				height: 70%;
+				width: 70%;
+				/* background-color: #0000FF; */
+				animation: run 7200s  linear infinite;
+			}
+			.hour{
+				height: 50%;
+				width: 6px;
+				margin: auto;
+				background-color: #000000;
+			}
+			
+			/* 设置分针 */
+		    .min-wrapper{
+				width: 80%;
+				height: 80%;
+				animation: run 600s steps(60) infinite ;
+			}
+			.min{
+				height: 50%;
+				width: 4px;
+				margin: auto;
+				background-color: #000000;
+			}
+			/* 设置秒针 */
+			.sec-wrapper{
+				width: 95%;
+				height: 95%;
+				animation: run 10s steps(60) infinite;
+			}
+			.sec{
+				height: 50%;
+				width: 2px;
+				margin: auto;
+				background-color: red;
+			}
+			/*  动画转动效果  
+			     旋转的关键帧
+			  */
+			@keyframes run{
+				from{
+					transform: rotateZ(0);
+				}
+				to{
+					transform: rotateZ(360deg);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <div class="sec-wrapper">
+			<div class="sec">
+				
+			</div>
+			
+		</div> -->
+		<!-- ---------------------------------------------------------------------------------------------------------- -->
+		<!-- 创建容器 -->
+		<div class="clock">
+			<!-- 创建时针 -->
+			<div class="hour-wrapper">
+				<div class="hour"></div>
+			</div>
+			<!-- 创建分针 -->
+			<div class="min-wrapper">
+				<div class="min"></div>
+			</div>
+			<!-- 创建秒针 -->
+			<div class="sec-wrapper">
+				<div class="sec"></div>
+			</div>
+		</div>
+		
+	</body>
+</html>

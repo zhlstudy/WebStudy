@@ -1,0 +1,29 @@
+/* 公共样式 */
+.clearfix::before,
+.clearfix::after{
+	content:'';
+	display: table;
+	clear: both;
+}
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/* 去除下划线 */
+a{
+	text-decoration: none;
+	color: #333333;
+}
+body{
+    font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+	color: #333333;
+	/* min-width: 12260px; */
+}
+
+/* 设置一个类，用来设置表示中间容器的宽度 */
+.w{
+	width: 1226px;
+	/* 居中 */
+	margin:0 auto;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		.box {
+			width: 340px;
+			height: 100px;
+			border-radius: 20px;
+			/* 这里设flex  是让它的伪类   在盒子中按中心点转 */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			position: absolute;
+			/* 想要伪类现实的  必须的定位 */
+
+			overflow: hidden;
+			/* background-color: blanchedalmond; */
+		}
+
+		.box::before,
+		.box::after {
+			content: '';
+			position: absolute;
+			/* 父级有了 子级也得有 想要伪类现实的  必须的定位 */
+			width: 400px;
+			height: 400px;
+			background-image: conic-gradient(transparent, transparent, transparent, #5f27cd);
+			animation: action 3s linear infinite;
+		}
+
+		.box::after {
+			animation-delay: -1.5s;
+			background-image: conic-gradient(transparent, transparent, transparent, blue);
+		}
+
+		@keyframes action {
+			from {
+				transform: rotateZ(0deg);
+			}
+
+			to {
+				transform: rotatez(360deg);
+			}
+		}
+
+		.a1{
+			z-index: 1;
+			position: absolute;
+			inset: 5px;
+			border-radius: 16px;
+			background-color:black;
+			color:#ffF;				
+			font-size: 40px;
+			text-align: center;			
+			filter: contrast(40);/* 调整图像的对比度 */
+		}
+		span{
+			animation: bian 3s forwards;
+			
+		}
+		@keyframes bian{
+			from{
+				letter-spacing: -50px; /* 字符间距 */
+				filter: blur(10px); /* 给图像设置高斯模糊 */
+			}
+			to{
+				letter-spacing: 0px;
+				filter: blur(1px);
+			}
+		}
+		
+	</style>
+	<body>
+		<div class="box">
+			<div class="a1">
+				<span>
+					ZSD GFDGFGHJ
+				</span>
+
+			</div>
+		</div>
+	</body>
+</html>

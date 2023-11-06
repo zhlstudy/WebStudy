@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jquery.js"></script>
+		<style>
+			#hezi {
+				width: 100vw;
+				height: 100vh;
+				background-color: black;
+				display: flex;
+				justify-content: center;
+				perspective: 1500px;
+			}
+
+			.pic {
+				margin-top: 380px;
+				display: flex;
+				width: 250px;
+				height: 150px;
+				/* 开启一个3D效果 */
+				transform-style: preserve-3d;
+				animation: action 20s linear infinite;
+			}
+
+			.pic:hover {
+				cursor: pointer;
+				animation-play-state: paused;
+			}
+
+			@keyframes action {
+				from {
+					transform: rotateX(-5deg) rotateY(0deg);
+				}
+
+				to {
+					transform: rotateX(-5deg) rotateY(360deg);
+				}
+			}
+
+			.pic img {
+				position: absolute;
+				/* 倒影的效果              below表示倒影在元素下方，15px表示倒影高度为原元素高度的15%。 */
+				/*                              定义了一个从透明到半透明白色的渐变，作为倒影的覆盖层。整个属性的作用是创建一个元素的倒影，并在倒影上添加一个半透明白色的层 */
+				-webkit-box-reflect: below 15px -webkit-linear-gradient(transparent 10%, rgba(255, 255, 255, 0.5));
+			}
+		</style>
+	</head>
+	<body>
+		<div id="hezi">
+			<div class="pic">
+				<img src="img/07.yidong/banner.jpg" alt="">
+				<img src="img/12.xuanzhuan/image01.jpeg" alt="">
+				<img src="img/12.xuanzhuan/image02.jpeg" alt="">
+				<img src="img/12.xuanzhuan/image03.jpeg" alt="">
+				<img src="img/12.xuanzhuan/image04.jpeg" alt="">
+				<img src="img/12.xuanzhuan/image05.jpeg" alt="">
+				
+			</div>
+			<script>
+				var a = $('.pic img')
+				if (a.length>0 && a.length <= 10) {
+					a.css({
+						'width': '240px',
+						'height': '150px',
+					})
+				}else if(a.length>10 && a.length<=20){
+					a.css({
+						'width': '100px',
+						'height': '70px',
+					})
+				}else{
+					a.css({
+						'width': '10px',
+						'height': '10px',
+					})
+					alert("图片太多！请减少图片在试！！！！！")
+				}
+				
+				for (let i = 1; i < a.length + 1; i++) {
+					var b = 360 / a.length
+					if (i == 1) {
+						$(".pic img:nth-child(" + i + ")").css(
+							'transform', 'translateZ(350px)'
+						)
+					} else {
+						$(".pic img:nth-child(" + i + ")").css(
+							'transform', ' rotateY(' + b * (i - 1) + 'deg) translateZ(350px)'
+						)
+					}
+				}
+			</script>
+		</div>
+
+	</body>
+</html>
